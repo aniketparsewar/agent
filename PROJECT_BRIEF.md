@@ -20,12 +20,12 @@ in — your Project 3 pipeline is one of this agent's tools.
 ## Weekend task list
 
 ### Day 1 — Make it run
-- [ ] Setup: venv, requirements, `.env` (same key as before)
-- [ ] `python agent.py` — try the three demo tasks below, watch the trace
-- [ ] Read `src/loop.py` and `src/tools.py` until you can explain: who
+- [x] Setup: venv, requirements, `.env` (same key as before)
+- [x] `python agent.py` — try the three demo tasks below, watch the trace
+- [x] Read `src/loop.py` and `src/tools.py` until you can explain: who
       executes the tools? What does the model actually output? Where does
       the "thinking" happen?
-- [ ] Exercises: add a 5th tool of your own; then deliberately break a
+- [x] Exercises: add a 5th tool of your own; then deliberately break a
       tool description and watch the agent misuse it
 
 ### Day 2 — Make it yours
