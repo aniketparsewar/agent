@@ -107,6 +107,14 @@ def read_file(path: str) -> str:
     except Exception as e:
         return f"Error: {e}"
 
+def word_count(path: str) -> str:
+    """Count words in a text file in the agent workspace."""
+    try:
+        n = len(_safe_path(path).read_text(encoding="utf-8").split())
+        return f"{n} word"
+    except Exception as e:
+        return f"Error: {e}"
+
 
 def write_file(path: str, content: str) -> str:
     """Write content to a text file in the agent workspace."""
@@ -170,6 +178,14 @@ TOOLS = {
              "content": {"type": "string",
                          "description": "full file content"}},
             ["path", "content"]),
+    },
+    "word_count": {
+        "func": word_count,
+        "schema": _schema(
+            "word_count",
+            "Count the number of words in a text file.",
+            {"path": {"type": "string", "description": "relative path"}},
+            ["path"]),
     },
 }
 
