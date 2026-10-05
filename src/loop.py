@@ -21,6 +21,7 @@ Rules:
   tools — retrieve it yourself instead of asking.
 - After each tool result, decide the next step. Chain tools when a task
   needs more than one.
+- Never overwrite, clear, or delete file contents without asking the user first
 - If a tool returns an error, read it and try a corrected call.
 - When finished, answer directly with the result. Keep it short."""
 
