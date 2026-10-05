@@ -30,6 +30,8 @@ def run(task: str, max_steps: int = 8, verbose: bool = True) -> dict:
     messages = [{"role": "system", "content": SYSTEM},
                 {"role": "user", "content": task}]
     total_cost = 0.0
+    tools_used = []
+
     for step in range(max_steps):
         msg, cost = llm.chat(messages, tools=tools.tool_schemas())
         total_cost += cost
@@ -37,7 +39,7 @@ def run(task: str, max_steps: int = 8, verbose: bool = True) -> dict:
 
         if not msg.tool_calls:
             return {"answer": msg.content, "cost_usd": total_cost,
-                    "steps": step + 1, "finished": True}
+                    "steps": step + 1, "finished": True, "tools_used": tools_used}
 
         for call in msg.tool_calls:
             name = call.function.name
@@ -48,6 +50,7 @@ def run(task: str, max_steps: int = 8, verbose: bool = True) -> dict:
                 result = f"Error: unparseable arguments for '{name}'"
             else:
                 result = tools.execute(name, args)
+                tools_used.append(name)
             if verbose:
                 print(f"  [tool] {name}({call.function.arguments})")
                 print(f"  [result] {str(result)[:220]}")
@@ -55,4 +58,4 @@ def run(task: str, max_steps: int = 8, verbose: bool = True) -> dict:
                              "content": str(result)})
 
     return {"answer": "Stopped: max steps reached without a final answer.",
-            "cost_usd": total_cost, "steps": max_steps, "finished": False}
+            "cost_usd": total_cost, "steps": max_steps, "finished": False, "tools_used": tools_used}
