@@ -43,6 +43,4 @@ agent> 15% of your total Amazon spending ($109.93) is about $16.49.
   (sandboxed to `./workspace_files/`).
 - `src/llm.py` — chat completions with tool schemas + cost tracking.
 
-## What I learned
 
-_(fill in after Day 2)_
